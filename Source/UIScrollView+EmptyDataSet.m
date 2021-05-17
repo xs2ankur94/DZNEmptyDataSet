@@ -217,10 +217,10 @@ static char const * const kEmptyDataSetView =       "emptyDataSetView";
 
 
 
-- (void)getButtonInstanceForEmptyDataSet:(UIButton *)button
+- (void)dzn_getCustomUIForButtonForEmptyDataSet:(UIButton *)button
 {
-    if (self.emptyDataSetSource && [self.emptyDataSetSource respondsToSelector:@selector(getButtonInstanceForEmptyDataSet:)]) {
-       [self.emptyDataSetSource getButtonInstanceForEmptyDataSet:self.emptyDataSetView.button];
+    if (self.emptyDataSetSource && [self.emptyDataSetSource respondsToSelector:@selector(provideCustomUIForButtonInstanceForEmptyDataSet:)]) {
+       [self.emptyDataSetSource provideCustomUIForButtonInstanceForEmptyDataSet:self.emptyDataSetView.button];
     }
 }
                                                                     
@@ -529,6 +529,10 @@ static char const * const kEmptyDataSetView =       "emptyDataSetView";
             }
             
             // Configure button
+            
+            [self dzn_getCustomUIForButtonForEmptyDataSet: [view button]];
+            
+            
             if (buttonImage) {
                 [view.button setImage:buttonImage forState:UIControlStateNormal];
                 [view.button setImage:[self dzn_buttonImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];

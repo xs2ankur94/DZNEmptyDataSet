@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Return  button instance
  **/
--(nullable UIButton *)getButtonInstanceForEmptyDataSet;
+- (void)getButtonInstanceForEmptyDataSet:(UIButton *)button;
 
 /**
  Asks the data source for the title of the dataset.

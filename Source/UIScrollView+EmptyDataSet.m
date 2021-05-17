@@ -216,14 +216,15 @@ static char const * const kEmptyDataSetView =       "emptyDataSetView";
 }
 
 
-- (UIButton *)getButtonInstanceForEmptyDataSet
+
+- (void)getButtonInstanceForEmptyDataSet:(UIButton *)button
 {
-    if (self.emptyDataSetSource && self.emptyDataSetView) {
-        return  [self.emptyDataSetView button];
+    if (self.emptyDataSetSource && [self.emptyDataSetSource respondsToSelector:@selector(getButtonInstanceForEmptyDataSet:)]) {
+       [self.emptyDataSetSource getButtonInstanceForEmptyDataSet:self.emptyDataSetView.button];
     }
-    
-    return nil;
 }
+                                                                    
+                                                                    
 
 - (NSAttributedString *)dzn_buttonTitleForState:(UIControlState)state
 {

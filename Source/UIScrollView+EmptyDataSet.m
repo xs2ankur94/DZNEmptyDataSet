@@ -529,10 +529,6 @@ static char const * const kEmptyDataSetView =       "emptyDataSetView";
             }
             
             // Configure button
-            
-            [self dzn_getCustomUIForButtonForEmptyDataSet: [view button]];
-            
-            
             if (buttonImage) {
                 [view.button setImage:buttonImage forState:UIControlStateNormal];
                 [view.button setImage:[self dzn_buttonImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
@@ -546,7 +542,7 @@ static char const * const kEmptyDataSetView =       "emptyDataSetView";
                 [view.button setBackgroundImage:[self dzn_buttonBackgroundImageForState:UIControlStateNormal] forState:UIControlStateNormal];
                 [view.button setBackgroundImage:[self dzn_buttonBackgroundImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
            }
-    
+            
         }
         
         // Configure offset
@@ -562,6 +558,8 @@ static char const * const kEmptyDataSetView =       "emptyDataSetView";
         
         [view setupConstraints];
         
+        [self dzn_getCustomUIForButtonForEmptyDataSet: [view button]];
+
         [UIView performWithoutAnimation:^{
             [view layoutIfNeeded];
         }];

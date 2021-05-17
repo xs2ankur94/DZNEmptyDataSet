@@ -39,12 +39,19 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
+
+
 /**
  The object that acts as the data source of the empty datasets.
  @discussion The data source must adopt the DZNEmptyDataSetSource protocol. The data source is not retained. All data source methods are optional.
  */
 @protocol DZNEmptyDataSetSource <NSObject>
 @optional
+
+/**
+ Return  button instance
+ **/
+-(nullable UIButton *)getButtonInstanceForEmptyDataSet;
 
 /**
  Asks the data source for the title of the dataset.

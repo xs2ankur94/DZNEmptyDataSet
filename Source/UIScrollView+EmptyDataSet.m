@@ -31,8 +31,8 @@
 @property (nonatomic, readonly) UILabel *titleLabel;
 @property (nonatomic, readonly) UILabel *detailLabel;
 @property (nonatomic, readonly) UIImageView *imageView;
-@property (nonatomic, readonly) UIButton *button;
 @property (nonatomic, strong) UIView *customView;
+@property (nonatomic, readonly) UIButton *button;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 
 @property (nonatomic, assign) CGFloat verticalOffset;
@@ -212,6 +212,16 @@ static char const * const kEmptyDataSetView =       "emptyDataSetView";
         if (color) NSAssert([color isKindOfClass:[UIColor class]], @"You must return a valid UIColor object for -imageTintColorForEmptyDataSet:");
         return color;
     }
+    return nil;
+}
+
+
+- (UIButton *)getButtonInstanceForEmptyDataSet
+{
+    if (self.emptyDataSetSource && self.emptyDataSetView) {
+        return  [self.emptyDataSetView button];
+    }
+    
     return nil;
 }
 

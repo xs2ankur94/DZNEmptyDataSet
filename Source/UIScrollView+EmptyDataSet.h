@@ -111,6 +111,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable UIImage *)buttonImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state;
 
 /**
+ Asks the data source for the backgroundColor to be used for the specified button state.
+ This method will override buttonBackgroundColor:forState: and present the color only without any text.
+ 
+ @param scrollView A scrollView subclass object informing the data source.
+ @param state The state that uses the specified title. The possible values are described in UIControlState.
+ @return An UIColor for the dataset button.
+ */
+
+- (nullable UIColor *)buttonBackgroundColorForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state;
+
+/**
  Asks the data source for a background image to be used for the specified button state.
  There is no default style for this call.
  

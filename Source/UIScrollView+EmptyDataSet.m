@@ -225,6 +225,16 @@ static char const * const kEmptyDataSetView =       "emptyDataSetView";
     return nil;
 }
 
+- (UIColor *)dzn_buttonBackgroundColorForState:(UIControlState)state
+{
+    if (self.emptyDataSetSource && [self.emptyDataSetSource respondsToSelector:@selector(buttonBackgroundColorForEmptyDataSet:forState:)]) {
+        UIColor *backgroundColor = [self.emptyDataSetSource buttonBackgroundColorForEmptyDataSet:self forState:state];
+        if (backgroundColor) NSAssert([backgroundColor isKindOfClass:[UIColor class]], @"You must return a valid Background Color object for -buttonBackgroundColorForState:forState:");
+        return backgroundColor;
+    }
+    return nil;
+}
+
 - (UIImage *)dzn_buttonImageForState:(UIControlState)state
 {
     if (self.emptyDataSetSource && [self.emptyDataSetSource respondsToSelector:@selector(buttonImageForEmptyDataSet:forState:)]) {
@@ -477,6 +487,7 @@ static char const * const kEmptyDataSetView =       "emptyDataSetView";
             
             UIImage *buttonImage = [self dzn_buttonImageForState:UIControlStateNormal];
             NSAttributedString *buttonTitle = [self dzn_buttonTitleForState:UIControlStateNormal];
+            UIColor *buttonBackgroudColor =  [self dzn_buttonBackgroundColorForState:UIControlStateNormal];
             
             UIImage *image = [self dzn_image];
             UIColor *imageTintColor = [self dzn_imageTintColor];
@@ -510,13 +521,17 @@ static char const * const kEmptyDataSetView =       "emptyDataSetView";
             if (buttonImage) {
                 [view.button setImage:buttonImage forState:UIControlStateNormal];
                 [view.button setImage:[self dzn_buttonImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+            } else if (buttonBackgroudColor) {
+                [view.button setBackgroundColor:buttonBackgroudColor];
             }
-            else if (buttonTitle) {
+            
+           if (buttonTitle) {
                 [view.button setAttributedTitle:buttonTitle forState:UIControlStateNormal];
                 [view.button setAttributedTitle:[self dzn_buttonTitleForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
                 [view.button setBackgroundImage:[self dzn_buttonBackgroundImageForState:UIControlStateNormal] forState:UIControlStateNormal];
                 [view.button setBackgroundImage:[self dzn_buttonBackgroundImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-            }
+           }
+    
         }
         
         // Configure offset

@@ -1019,7 +1019,9 @@ Class dzn_baseClassToSwizzleForTarget(id target)
             [subviewStrings addObject:@"button"];
             views[[subviewStrings lastObject]] = _button;
             
-            [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(padding@750)-[button(>=0)]-(padding@750)-|"
+            // made button centre horizontally
+            [[_button.centerXAnchor constraintEqualToAnchor:self.contentView.centerXAnchor] setActive:YES];
+//            [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(padding@750)-[button(>=0)]-(padding@750)-|"
                                                                                      options:0 metrics:metrics views:views]];
         }
         // or removes from its superview
